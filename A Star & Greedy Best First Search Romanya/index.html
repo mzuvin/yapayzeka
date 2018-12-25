@@ -1,0 +1,118 @@
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Greedy and A star Algorithm in Romania - Javascript</title>
+  
+  <link rel='stylesheet' href='https://unpkg.com/leaflet@1.2.0/dist/leaflet.css'>
+  <link rel='stylesheet' href='https://unpkg.com/leaflet.pm@latest/dist/leaflet.pm.css'>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <style type="text/css">
+    #map{
+      background-color:#ccc;
+      position:fixed;
+      width:100%;
+      height:100%;
+      top:0;
+      left:0;
+      cursor:pointer;
+    }
+    #soflow, #soflow2, #algoritma{
+
+     -webkit-appearance: button;
+     -webkit-border-radius: 2px;
+     -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1); 
+     -webkit-padding-end: 20px;
+     -webkit-padding-start: 2px;
+     -webkit-user-select: none;
+     background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
+     background-position: 97% center;
+     background-repeat: no-repeat;
+     border: 1px solid #AAA;
+     color: #555;
+     font-size: inherit;
+     margin: 10px;
+     overflow: hidden;
+     padding: 5px 10px;
+     text-overflow: ellipsis;
+     white-space: nowrap;
+   }
+   .op{
+     float: left;
+   }
+ </style>
+
+</head>
+
+<body>
+
+  <div id="map"></div>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'></script>
+  <script src='https://unpkg.com/leaflet@1.2.0/dist/leaflet.js'></script>
+  <script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
+  <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyC3s6RiGu5etwmY63UYbIkMTwp1djBmmM4&callback=initMap'></script>
+  <script src='https://unpkg.com/leaflet.pm@latest/dist/leaflet.pm.min.js'></script>
+
+  
+
+  <script  src="js/romanya.js"></script>
+
+
+  <script>
+
+function op() {
+  var sec='<div class="op"><div class="leaflet-control-zoom leaflet-bar leaflet-control"><select id="soflow">    	<option class="0"></option>  	<option class="1"></option>  	<option class="2"></option>  	<option class="3"></option>  	<option class="4"></option>  	<option class="5"></option>  	<option class="6"></option>  	<option class="7"></option>  	<option class="8"></option>  	<option class="9"></option>  	<option class="10"></option>  	<option class="11"></option>  	<option class="12"></option>  	<option class="13"></option>  	<option class="14"></option>  	<option class="15"></option>  	<option class="16"></option>  	<option class="17"></option>  	<option class="18"></option>  	<option class="19"></option></select></div>';
+
+
+  var sec2='<div class="leaflet-control-zoom leaflet-bar leaflet-control"><select id="soflow2">    	<option class="0"></option>  	<option class="1"></option>  	<option class="2"></option>  	<option class="3"></option>  	<option class="4"></option>  	<option class="5"></option>  	<option class="6"></option>  	<option class="7"></option>  	<option class="8"></option>  	<option class="9"></option>  	<option class="10"></option>  	<option class="11"></option>  	<option class="12"></option>  	<option class="13"></option>  	<option class="14"></option>  	<option class="15"></option>  	<option class="16"></option>  	<option class="17"></option>  	<option class="18"></option>  	<option class="19"></option></select> <br> <select id="algoritma"><option class="0">Algoritmayı Seciniz.</option> <option class="1">Greddy Best First Search,0</option>    <option class="2">AStar,1</option></select></div></div>';
+  document.querySelectorAll(".leaflet-bottom.leaflet-left")["0"].innerHTML=sec+""+sec2;
+
+  for(var n in isimler){
+  	document.querySelectorAll("#soflow")["0"][n].innerText=isimler[n]+","+n;
+  	document.querySelectorAll("#soflow2")["0"][n].innerText=isimler[n]+","+n;
+  }
+
+
+
+  $('#soflow').on('change', function (e) {
+        var optionSelected = $("option:selected", this);
+        valueSelected = this.value;
+    //alert(valueSelected)
+    var index=valueSelected.split(",");
+    bas=index[1];
+  });
+
+      $('#soflow2').on('change', function (e) {
+        var optionSelected = $("option:selected", this);
+        valueSelected = this.value;
+    //alert(valueSelected)
+    var index=valueSelected.split(",");
+    son=index[1];
+    //ciz(bas,son);
+  });
+
+      alg=0;
+  $('#algoritma').on('change', function (e) {
+    var optionSelected = $("option:selected", this);
+    valueSelected = this.value;
+    //alert(valueSelected)
+    var index=valueSelected.split(",");
+    alg=index[1];
+
+    if(alg==0){
+      ciz2(bas,son);
+    }
+    if(alg==1){
+      ciz(bas,son);
+    }
+
+  });
+}
+    window.onload=op;
+  </script>
+
+
+</body>
+
+</html>
